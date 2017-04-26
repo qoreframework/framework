@@ -1,6 +1,7 @@
 {
   "name": "qore/framework",
   "type": "framework",
+  "license": "MIT",
   "description": "A lightweight framework for PHP 7",
   "keywords": ["qore","framework"],
   "authors": [
