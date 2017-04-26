@@ -1,4 +1,4 @@
-# Qore
+# Qore Framework
 
 Qore is a lightweight framework for PHP, built to make it simple to design and send websites to production.
 
