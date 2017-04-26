@@ -3,7 +3,7 @@
   "type": "framework",
   "license": "MIT",
   "description": "A lightweight framework for PHP 7",
-  "keywords": ["qore","framework"],
+  "keywords": ["qore","framework", "qore-framework"],
   "authors": [
     {
       "name": "Andrew Quackenbos",
