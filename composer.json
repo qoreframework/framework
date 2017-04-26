@@ -14,7 +14,7 @@
   ],
   "require": {
     "php": ">=7.0",
-	"qore/admin": "*",
+	"qore/admin": "dev-master",
     "usmanhalalit/pixie": ">=2.0",
     "corneltek/pux": "~1.5",
     "twig/twig": "^2.0"
