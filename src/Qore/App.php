@@ -1,7 +1,7 @@
 <?php 
 namespace Qore;
 
-final class App;
+final class App
 {
 	/** Data **/
 	private static $__version		= '0.1.0-dev';
