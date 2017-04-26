@@ -1,5 +1,7 @@
 # Qore Framework
 
+> This is a minor update for a packagist update.
+
 Qore is a lightweight framework for PHP, built to make it simple to design and send websites to production.
 
 This documentation currently represents the target functionality.  
