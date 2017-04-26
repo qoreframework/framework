@@ -1,0 +1,26 @@
+{
+  "name": "qore/framework",
+  "type": "framework",
+  "description": "A lightweight framework for PHP 7",
+  "keywords": ["qore","framework"],
+  "authors": [
+    {
+      "name": "Andrew Quackenbos",
+      "email": "a.quackenbos@gmail.com",
+      "homepage": "http://andrew.quackenbos.me",
+      "role": "Developer"
+    }
+  ],
+  "require": {
+    "php": ">=7.0",
+	"qore/admin": "*",
+    "usmanhalalit/pixie": ">=2.0",
+    "corneltek/pux": "~1.5",
+    "twig/twig": "^2.0"
+  },
+  "autoload": {
+    "psr-0": {
+      "Qore": "src"
+    }
+  }
+}
