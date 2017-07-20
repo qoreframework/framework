@@ -1,86 +1,92 @@
 {
-  "metadata": {
-    "name": "Qore Framework",
-    "version": 1,
-    "namespace": "Qore\\Framework",
-    "Author": "Andrew Quackenbos"
-  },
-  "configuration": {
-    "web": {
-      "render": "group",
-      "label": "Web Configuration",
-      "children": {
-          "unsecure_base_url": {
-            "configurable": true,
-            "label": "Non-Secure Base URL",
-            "value": "http://example.com/",
-            "render": "text",
-            "required": true,
-            "validate": "url"
-          },
-          "secure_base_url": {
-            "configurable": true,
-            "label": "Secure Base URL",
-            "value": "https://example.com/",
-            "render": "text",
-            "required": true,
-            "validate": "url"
-          }
-        }
-      }
-    },
-    "database": {
-      "render": "group",
-      "label": "Database Configuration",
-      "children": {
-        "host": {
-          "configurable": false,
-          "value": "",
-          "flatfile": true
-        },
-        "engine": {
-          "configurable": false,
-          "value": "",
-          "flatfile": true
-        },
-        "username": {
-          "configurable": false,
-          "value": "",
-          "flatfile": true
-        },
-        "password": {
-          "configurable": false,
-          "value": "",
-          "flatfile": true,
-          "save": "\\Qore\\Framework\\Utility\\Password::encodeConfigurableField",
-          "load": "\\Qore\\Framework\\Utility\\Password::decodeConfigurableField"
-        },
-        "port": {
-          "configurable": false,
-          "value": "",
-          "flatfile": true
-        }
-      }
-    }    
-  },
-  "routes": {
-
-  },
-  "install": {
-    "1": {
-      "filesystem": {
-        "touch": "config.json"
-      },
-      "database": {
-        "modules": {
-          "pgsql": "CREATE TABLE IF NOT EXISTS `?` (`name` VARCHAR(100) CONSTRAINT pk_name PRIMARY KEY, `version` INT(10) NOT NULL);",
-          "mysql": "CREATE TABLE IF NOT EXISTS `?` (`name` VARCHAR(100) NOT NULL, `version` INT(10) NOT NULL, PRIMARY KEY (`name`));"
-        }
-      },
-      "scripts": [
-        "Install::configureDatabaseInformation",
-        "Install::configureBaseUrlInformation"
-      ]
-    }
-  }
+	"metadata": {
+		"name": "Qore Framework",
+		"version": 1,
+		"namespace": "Qore\\Framework",
+		"Author": "Andrew Quackenbos"
+	},
+	"configuration": {
+		"web": {
+			"render": "group",
+			"label": "Web Configuration",
+			"children": {
+				"unsecure_base_url": {
+					"configurable": true,
+					"label": "Non-Secure Base URL",
+					"value": "http://example.com/",
+					"render": "text",
+					"required": true,
+					"validate": "url"
+				},
+				"secure_base_url": {
+					"configurable": true,
+					"label": "Secure Base URL",
+					"value": "https://example.com/",
+					"render": "text",
+					"required": true,
+					"validate": "url"
+				}
+			}
+		}
+	},
+	"database": {
+		"render": "group",
+		"label": "Database Configuration",
+		"children": {
+			"host": {
+				"configurable": false,
+				"value": "",
+				"flatfile": true
+			},
+			"engine": {
+				"configurable": false,
+				"value": "",
+				"flatfile": true
+			},
+			"username": {
+				"configurable": false,
+				"value": "",
+				"flatfile": true
+			},
+			"password": {
+				"configurable": false,
+				"value": "",
+				"flatfile": true,
+				"save": "\\Qore\\Framework\\Utility\\Password::encodeConfigurableField",
+				"load": "\\Qore\\Framework\\Utility\\Password::decodeConfigurableField"
+			},
+			"port": {
+				"configurable": false,
+				"value": "",
+				"flatfile": true
+			},
+			"prefix": {
+				"configurable": false,
+				"value": "",
+				"flatfile": true
+			}
+		}
+	}
+},
+"routes": {
+	
+},
+"install": {
+	"1": {
+		"filesystem": {
+			"touch": "config.json"
+		},
+		"scripts": ["Install::configureDatabaseInformation",
+		"Install::configureBaseUrlInformation"]
+	},
+	"2": {
+		"database": {
+			"modules": {
+				"pgsql": "CREATE TABLE IF NOT EXISTS `?` (`name` VARCHAR(100) CONSTRAINT pk_name PRIMARY KEY, `version` INT(10) NOT NULL);",
+				"mysql": "CREATE TABLE IF NOT EXISTS `?` (`name` VARCHAR(100) NOT NULL, `version` INT(10) NOT NULL, PRIMARY KEY (`name`));"
+			}
+		},
+		
+	}
+}
 }

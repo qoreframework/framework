@@ -38,9 +38,18 @@ final class App
 			try
 			{
 				$config = self::config('database');
+				if(!$config)
+				{
+					throw new Qore\Framework\Exception\Fatal('Database configuration missing.');
+				}
 				self::$__connection = new \Pixie\Connection($config['driver'],$config);
 				self::$__qb = new \Pixie\QueryBuilder\QueryBuilderHandler(self::$__connection);
-			} 
+			}
+			catch (Qore\Framework\Exception\Fatal $e)
+			{
+				throw $e;
+				exit;
+			}
 			catch (Exception $e)
 			{
 				throw new Qore\Framework\Exception\Fatal('Could not connect to configured database.');
@@ -105,9 +114,13 @@ final class App
 		}
 	}
 	
-	public static function setConfig($configArray)
+	public static function setConfig($configFile)
 	{
-		self::$__config = $configArray;
+		if(!is_readable($configFile))
+		{
+			throw new Qore\Framework\Exception\Fatal('Qore Config file unable to be loaded');
+		}
+		self::$__config = json_decode(file_get_contents($configFile),true);
 	}
 	
 	public static function setModules($modulesArray)
@@ -117,8 +130,18 @@ final class App
 	
 	public static function config($section,$key = false)
 	{
+		if(!array_key_exists($section,self::$__config))
+		{
+			return false;
+		}
+		
 		if($key)
 		{
+			if(!array_key_exists($key, self::$__config[$section]))
+			{
+				return false;
+			}
+			
 			return self::$__config[$section][$key];
 		}
 		return self::$__config[$section];
@@ -134,8 +157,12 @@ final class App
 				throw new \Qore\Framework\Exception\Database('Module "'.$module.'" is not installed.');
 			}
 			return $row->version;
-		} 
-		catch (\Qore\Framework\Exception\Database $e)
+		}
+		catch (Qore\Framework\Exception\Fatal $e)
+		{
+			return 0;
+		}
+		catch (Qore\Framework\Exception\Database $e)
 		{
 			return 0;
 		}
